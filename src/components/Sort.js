@@ -1,13 +1,12 @@
 import React from "react";
 
-function Sort() {
+function Sort({ sortType, setSort }) {
     const [toggleSortPopup, setToggleSortPopup] = React.useState(false);
-    const [activeList, setActiveList] = React.useState(0);
 
     const list = ['популярности', 'цене', 'алфавиту'];
 
     const selectSortItem = (i) => {
-        setActiveList(i);
+        setSort(i);
         setToggleSortPopup(false);
     }
 
@@ -29,16 +28,17 @@ function Sort() {
                 <b>Сортировка по:</b>
                 <span
                     onClick={() => setToggleSortPopup(!toggleSortPopup)}
-                >{list[activeList]}</span>
+                >{list[sortType]}</span>
             </div>
             {toggleSortPopup ? (<div className="sort__popup">
                 <ul>
                     {list.map((item, i) => {
                         return (
-                            <li className={activeList === i ? 'active' : null}
+                            <li className={sortType === i ? 'active' : null}
                                 onClick={() => selectSortItem(i)}
-                                key={i}
-                            > {list[i]}</li>
+                                key={i}>
+                                {list[i]}
+                            </li>
                         )
                     })}
                 </ul>

@@ -9,22 +9,33 @@ import SkeletonPizzaBlock from '../components/PizzaBlock/SkeletonPizzaBlock';
 const Home = () => {
     const [items, setItems] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [activeCategory, setActiveCategory] = useState(0);
+    const [sortType, setSortType] = useState(0);
 
     useEffect(() => {
-        fetch('https://660d5c466ddfa2943b3431c8.mockapi.io/items')
+        setIsLoading(true);
+        fetch(`https://660d5c466ddfa2943b3431c8.mockapi.io/items?filter=${activeCategory}&sortBy=${sortType}`)
             .then(res => res.json())
             .then((arr) => {
                 setItems(arr);
                 setIsLoading(false);
             })
         window.scrollTo(0, 0);
-    }, []);
+    }, [activeCategory, sortType]);
+
+    const setCategory = (category) => {
+        setActiveCategory(() => category);
+    }
+
+    const setSort = (sortType) => {
+        setSortType(() => sortType);
+    }
 
     return (
         <>
             <div className="content__top">
-                <Categories />
-                <Sort />
+                <Categories category={activeCategory} setCategory={setCategory} />
+                <Sort sortType={sortType} setSort={setSort} />
             </div>
             <h2 className="content__title">Все пиццы</h2>
             <div className="content__items">
