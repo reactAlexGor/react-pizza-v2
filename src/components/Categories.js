@@ -16,7 +16,7 @@ function Categories({ category, setCategory }) {
         <div className="categories">
             <ul>
                 {categories.map((item, i) => (
-                    <li className={category === i ? 'active' : i}
+                    <li className={category === i ? 'active' : ''}
                         onClick={() => setCategory(i)}
                         key={i}>
                         {item}

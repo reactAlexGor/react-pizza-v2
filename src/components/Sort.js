@@ -1,9 +1,16 @@
 import React from "react";
 
-function Sort({ sortType, setSort }) {
+function Sort({ sortObj, setSort }) {
     const [toggleSortPopup, setToggleSortPopup] = React.useState(false);
 
-    const list = ['популярности', 'цене', 'алфавиту'];
+    const list = [
+        { name: 'популярности (DESC)', sortProperty: 'rating' },
+        { name: 'популярности (ASC)', sortProperty: '-rating' },
+        { name: 'цене (DESC)', sortProperty: 'price' },
+        { name: 'цене (ASC)', sortProperty: '-price' },
+        { name: 'алфавиту (DESC)', sortProperty: 'title' },
+        { name: 'алфавиту (ASC)', sortProperty: '-title' }
+    ];
 
     const selectSortItem = (i) => {
         setSort(i);
@@ -28,16 +35,16 @@ function Sort({ sortType, setSort }) {
                 <b>Сортировка по:</b>
                 <span
                     onClick={() => setToggleSortPopup(!toggleSortPopup)}
-                >{list[sortType]}</span>
+                >{sortObj.name}</span>
             </div>
             {toggleSortPopup ? (<div className="sort__popup">
                 <ul>
                     {list.map((item, i) => {
                         return (
-                            <li className={sortType === i ? 'active' : null}
-                                onClick={() => selectSortItem(i)}
+                            <li className={sortObj.name === item.name ? 'active' : null}
+                                onClick={() => selectSortItem(item)}
                                 key={i}>
-                                {list[i]}
+                                {item.name}
                             </li>
                         )
                     })}
