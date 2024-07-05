@@ -4,7 +4,7 @@
 }
 
 .input {
-    width: 300px;
+    width: 400px;
     height: 40px;
     padding: 8px 40px;
     border: 1px solid rgb(0, 0, 0, 0.1);
@@ -14,7 +14,7 @@
 
     &:focus {
         border: 1px solid rgb(0, 0, 0, 0.3);
-        width: 400px;
+        // width: 400px;
     }
 
     &::placeholder {
@@ -29,4 +29,18 @@
     position: absolute;
     top: 2px;
     left: 1px;
+}
+
+.clearIcon {
+    width: 30px;
+    height: 30px;
+    opacity: 0.5;
+    position: absolute;
+    left: 360px;
+    top: 8px;
+    color: black;
+    cursor: pointer;
+    &:hover {
+        opacity: 0.8;
+    }
 }
